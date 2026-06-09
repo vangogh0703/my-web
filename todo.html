@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      font-family: "Microsoft YaHei", sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+    }
+    h1 { color: #00d4ff; font-size: 24px; }
+    .input-row { display: flex; gap: 10px; margin: 20px 0; }
+    #taskInput { flex: 1; padding: 10px; background: #1a1a2e; color: #e0e0e0; border: 1px solid #333; border-radius: 6px; }
+    button { padding: 10px 16px; background: #00d4ff; color: #0d0d0d; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; align-items: center; gap: 10px; padding: 12px; background: #1a1a2e; border-radius: 8px; margin: 8px 0; }
+    li.done span { text-decoration: line-through; color: #666; }
+    .task-text { flex: 1; cursor: pointer; }
+    .del-btn { background: #ff4757; padding: 4px 10px; font-size: 14px; }
+  </style>
+  <script>
+    // 页面加载时，从 localStorage 恢复之前保存的任务
+    window.onload = function() {
+      var saved = JSON.parse(localStorage.getItem('myTodos') || '[]');
+      saved.forEach(function(item) {
+        var li = document.createElement('li');
+        if (item.done) li.classList.add('done');
+        li.innerHTML = makeRow(item.text);
+        document.getElementById('taskList').appendChild(li);
+      });
+    };
+
+    // 生成一行任务的 HTML（addTask 和 onload 共用）
+    function makeRow(text) {
+      return '<span class="task-text" onclick="toggleDone(this)">' + text + '</span>' +
+             '<button class="del-btn" onclick="delTask(this)">删除</button>';
+    }
+
+    // 添加新任务
+    function addTask() {
+      var input = document.getElementById('taskInput');
+      var text = input.value;
+      if (text === '') return;
+
+      var li = document.createElement('li');
+      li.innerHTML = makeRow(text);
+      document.getElementById('taskList').appendChild(li);
+      input.value = '';
+      saveTasks();
+    }
+
+    // 切换完成状态
+    function toggleDone(span) {
+      span.parentElement.classList.toggle('done');
+      saveTasks();
+    }
+
+    // 删除任务
+    function delTask(btn) {
+      btn.parentElement.remove();
+      saveTasks();
+    }
+
+    // 把当前所有任务保存到 localStorage
+    function saveTasks() {
+      var items = [];
+      var lis = document.querySelectorAll('#taskList li');
+      lis.forEach(function(li) {
+        items.push({
+          text: li.querySelector('.task-text').innerText,
+          done: li.classList.contains('done')
+        });
+      });
+      localStorage.setItem('myTodos', JSON.stringify(items));
+    }
+  </script>
+</head>
+<body>
+  <h1>📋 我的待办事项</h1>
+  <div class="input-row">
+    <input id="taskInput" type="text" placeholder="输入新任务...">
+    <button onclick="addTask()">添加</button>
+  </div>
+  <ul id="taskList"></ul>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+.cockpit {
+  background-color: #2a1a1a;
+  border-left: 4px solid #ff6b6b;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+.card {
+  background-color: #1a1a2e;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+p {
+  line-height: 1.8;
+}
+    body {
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      font-family: "Microsoft YaHei", sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+    }
+    h1 {
+      font-size: 28px;
+      color: #00d4ff;
+    }
+    h2 {
+      color: #7b68ee;
+    }
+    h3 {
+      color: #ff6b6b;
+    }
+    a {
+      color: #00d4ff;
+    }
+    img {
+      border-radius: 10px;
+    }
+.row {
+  display: flex;
+  gap: 20px;
+}
+.row > div {
+  flex: 1;
+}
+  </style>
+<script>
+function applyTitle() {
+  var newText = document.getElementById('myInput').value;
+  document.getElementById('title').innerText = newText;
+}
+
+function resetTitle() {
+  document.getElementById('title').innerText = '我的个人网页';
+  document.getElementById('myInput').value = '';
+}</script>
+</head>
+<body>
+  <h1 id="title">我的个人网页</h1>
+<input id="myInput" type="text" placeholder="输入新标题...">
+<button onclick="applyTitle()">应用</button>
+<button onclick="resetTitle()">重置</button>
+  <div class="row">
+   <div class="card">
+    <h2>我的座右铭</h2>
+    <p>敬畏生命</p>
+  </div>
+  <div class="cockpit">
+   <h2>飞行笔记</h2>
+   <p>ILS进近，决断高度200英尺</p>
+  </div>
+ </div>
+  <p>我叫 梵高，这是我用AI做的第一个网页。</p>
+  <p>今天是 2026年6月9日，我开始了编程学习。</p>
+  <p>我用claude学习编程和vibe coding，要继续加油啊</p>
+  <img src="https://placehold.co/200x100" alt="占位图片">
+  <p>去 <a href="https://www.baidu.com">百度</a> 搜更多东西</p>
+  <h2>我今天学到的</h2>
+  <ul>
+    <li>终端操作：pwd, ls, cd, mkdir</li>
+    <li>创建HTML文件</li>
+    <li>大标题 h1 和段落 p</li>
+    <li>图片 img</li>
+    <li>链接 a</li>
+  </ul>
+  <h3>我的目标</h3>
+  <p>想要获得自身价值</p>
+</body>
+</html>
